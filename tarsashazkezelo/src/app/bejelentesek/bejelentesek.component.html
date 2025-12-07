@@ -1,0 +1,96 @@
+<div class="container mt-4">
+
+  <h1 class="mb-4">Bejelentések</h1>
+
+  <button class="btn btn-success mb-3" (click)="ujBejelentesMegnyit()">
+    + Új bejelentés
+  </button>
+
+  <div class="card mb-4" *ngIf="ujFormLathato && !szerkesztesMod">
+    <div class="card-body">
+
+      <h4 class="mb-3">Új bejelentés</h4>
+
+      <form (ngSubmit)="addBejelentes()">
+
+        <div class="mb-2">
+          <label>Lakó ID:</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="ujBejelentes.lakoId" name="lakoid" required>
+        </div>
+
+        <div class="mb-2">
+          <label>Típus:</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="ujBejelentes.tipus" name="tipus" required>
+        </div>
+
+        <div class="mb-2">
+          <label>Leírás:</label>
+          <textarea class="form-control"
+                 [(ngModel)]="ujBejelentes.leiras" name="leiras" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-2">Hozzáadás</button>
+        <button type="button" class="btn btn-secondary ms-2 mt-2"
+                (click)="ujFormLathato = false">Mégse</button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <div class="card mb-4" *ngIf="szerkesztesMod">
+    <div class="card-body">
+
+      <h4 class="mb-3">Bejelentés módosítása</h4>
+
+      <form (ngSubmit)="mentModositas()">
+
+        <div class="mb-2">
+          <label>Lakó ID:</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="modositando.lakoId" name="lakoid_m" required>
+        </div>
+
+        <div class="mb-2">
+          <label>Típus:</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="modositando.tipus" name="tipus_m" required>
+        </div>
+
+        <div class="mb-2">
+          <label>Leírás:</label>
+          <textarea class="form-control"
+                 [(ngModel)]="modositando.leiras" name="leiras_m" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-2">Mentés</button>
+        <button type="button" class="btn btn-secondary ms-2 mt-2"
+                (click)="szerkesztesMod = false">Mégse</button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let b of bejelentesek">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+
+          <h5 class="card-title">Bejelentés #{{ b.id }}</h5>
+
+          <p><strong>Lakó ID:</strong> {{ b.lakoId }}</p>
+          <p><strong>Típus:</strong> {{ b.tipus }}</p>
+          <p><strong>Leírás:</strong> {{ b.leiras }}</p>
+
+          <button class="btn btn-primary me-2" (click)="szerkeszt(b)">Módosítás</button>
+          <button class="btn btn-danger" (click)="torol(b.id)">Törlés</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

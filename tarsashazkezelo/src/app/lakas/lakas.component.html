@@ -1,0 +1,155 @@
+<div class="container mt-4">
+
+  <h1 class="mb-4">Lakók</h1>
+
+  
+  <button class="btn btn-success mb-3" (click)="ujLakoMegnyit()">
+    + Új lakó felvétele
+  </button>
+
+ 
+  <div class="card mb-4" *ngIf="ujFormLathato && !szerkesztesMod">
+    <div class="card-body">
+
+      <h4 class="mb-3">Új lakó felvétele</h4>
+
+      <form (ngSubmit)="addLako()">
+
+        <div class="mb-2">
+          <label>Felhasználó ID:</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="ujLako.felhasznaloId" name="felhid" required>
+        </div>
+
+        <div class="mb-2">
+          <label>Név:</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="ujLako.nev" name="nev" required>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-2">
+            <label>Lakásszám:</label>
+            <input type="text" class="form-control"
+                   [(ngModel)]="ujLako.lakasszam" name="lakas" required>
+          </div>
+          <div class="col-md-4 mb-2">
+            <label>Emelet:</label>
+            <input type="number" class="form-control"
+                   [(ngModel)]="ujLako.emelet" name="emelet">
+          </div>
+          <div class="col-md-4 mb-2">
+            <label>Telefonszám:</label>
+            <input type="text" class="form-control"
+                   [(ngModel)]="ujLako.telefonszam" name="tel">
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <label>Költség:</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="ujLako.koltseg" name="koltseg">
+        </div>
+
+        <div class="mb-2">
+          <label>Megjegyzés:</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="ujLako.megjegyzes" name="megj">
+        </div>
+
+        <button type="submit" class="btn btn-success mt-2">Lakó felvétele</button>
+        <button type="button" class="btn btn-secondary mt-2 ms-2"
+                (click)="ujFormLathato = false">
+          Mégse
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+
+  <div class="card mb-4" *ngIf="szerkesztesMod">
+    <div class="card-body">
+
+      <h4 class="mb-3">Lakó módosítása</h4>
+
+      <form (ngSubmit)="mentModositas()">
+
+        <div class="mb-2">
+          <label>Név:</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="modositando.nev" name="nev_m" required>
+        </div>
+
+        <div class="mb-2">
+          <label>Felhasználó ID:</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="modositando.felhasznaloId" name="felhid_m" required>
+        </div>
+
+        <div class="mb-2">
+          <label>Lakásszám:</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="modositando.lakasszam" name="lakas_m">
+        </div>
+
+        <div class="mb-2">
+          <label>Emelet:</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="modositando.emelet" name="emelet_m">
+        </div>
+
+        <div class="mb-2">
+          <label>Telefonszám:</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="modositando.telefonszam" name="tel_m">
+        </div>
+
+        <div class="mb-2">
+          <label>Költség:</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="modositando.koltseg" name="koltseg_m">
+        </div>
+
+        <div class="mb-2">
+          <label>Megjegyzés:</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="modositando.megjegyzes" name="megj_m">
+        </div>
+
+        <button type="submit" class="btn btn-success mt-2">Módosítás mentése</button>
+        <button type="button" class="btn btn-secondary mt-2 ms-2"
+                (click)="szerkesztesMod = false">
+          Mégse
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let l of lakok">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+
+          <h5 class="card-title">{{ l.nev }}</h5>
+
+          <p><strong>Lakásszám:</strong> {{ l.lakasszam }}</p>
+          <p><strong>Emelet:</strong> {{ l.emelet }}</p>
+          <p><strong>Telefonszám:</strong> {{ l.telefonszam }}</p>
+          <p><strong>Költség:</strong> {{ l.koltseg }} Ft</p>
+          <p><strong>Megjegyzés:</strong> {{ l.megjegyzes }}</p>
+
+          <button class="btn btn-primary me-2" (click)="szerkesztLako(l)">Módosítás</button>
+          <button class="btn btn-danger" (click)="torolLako(l.id)">Törlés</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

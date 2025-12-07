@@ -1,0 +1,18 @@
+<nav class="felsosav">
+  <div class="menu-bal">
+    <span class="logo">Társasházkezelő</span>
+  </div>
+
+  <div class="menu-jobb">
+    
+    <a routerLink="/belepes" *ngIf="!felhasznalo.isBejelentkezve()">Bejelentkezés</a>
+    <a routerLink="/regisztracio" *ngIf="!felhasznalo.isBejelentkezve()">Regisztráció</a>
+
+    
+    <a routerLink="/lakas" *ngIf="felhasznalo.isBejelentkezve()">Lakások</a>
+    <a routerLink="/bejelentesek" *ngIf="felhasznalo.isBejelentkezve()">Bejelentések</a>
+    <a href="#" (click)="felhasznalo.kijelentkeztet()" *ngIf="felhasznalo.isBejelentkezve()">Kijelentkezés</a>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
